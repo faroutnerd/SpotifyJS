@@ -1,4 +1,4 @@
-import { createContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
 
 export const PlayerContext = createContext();
@@ -9,7 +9,7 @@ const PlayerContextProvider = (props) => {
     const seekBg = useRef();    // This is the background of the seek bar -> Player.jsx
     const seekBar = useRef();   // This is the actual seek bar that moves when the audio is playing <hr/> -> Player.jsx
     
-    const [track, setTrack] = useState(songsData[0]); // whenever we load our project it should play the first song -> App.jsx <audio>
+    const [track, setTrack] = useState(songsData[0]);
     const [playStatus, setPlayStatus] = useState(false); 
     const [time, setTime] = useState({
         currentTime: {
@@ -31,6 +31,23 @@ const PlayerContextProvider = (props) => {
         audioRef.current.pause();
         setPlayStatus(false);
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            audioRef.current.ontimeupdate = () => {
+                setTime({
+                    currentTime: {
+                        second: Math.floor(audioRef.current.currentTime % 60),
+                        minute: Math.floor(audioRef.current.currentTime / 60)
+                    },
+                    totalTime: {
+                        second: Math.floor(audioRef.current.duration % 60),
+                        minute: Math.floor(audioRef.current.duration / 60)
+                    }
+                })
+            }
+        }, 1000)
+    }, [audioRef])
 
     const contextValue = {
         audioRef,
