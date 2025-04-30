@@ -31,7 +31,11 @@ const addSong = async (req, res) => {
 }
 
 const listSong = async (req, res) => {
-
+    try {
+        const allSongs = await songModel.find({});
+    } catch (error) {
+        
+    }
 }
 
 export { addSong, listSong };
