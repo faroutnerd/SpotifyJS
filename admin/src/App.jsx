@@ -10,6 +10,8 @@ import AddAlbum from './pages/AddAlbum';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 
+export const url = "http://localhost:4000/api";
+
 const App = () => {
   return (
     <div className='flex items-start min-h-screen'>
