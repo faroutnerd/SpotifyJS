@@ -11,7 +11,7 @@ const PlayerContextProvider = (props) => {
     const seekBg = useRef();    // This is the background of the seek bar -> Player.jsx
     const seekBar = useRef();   // This is the actual seek bar that moves when the audio is playing <hr/> -> Player.jsx
 
-    const url = 'http://localhost:4000/api';
+    const url = 'https://spotify-backend-x05l.onrender.com/api';
 
     const [songsData, setSongsData] = useState([]);
     const [albumsData, setAlbumsData] = useState([]);
